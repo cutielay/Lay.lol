@@ -1,252 +1,199 @@
-:root{
-  --purple:#8b7cff;
-  --purple-2:#6f60ee;
-  --purple-dark:#201d3b;
-  --card:#211f3f;
-  --card-2:#18162d;
-  --text:#9186ff;
-  --glow:0 0 18px rgba(139,124,255,.85), 0 0 38px rgba(139,124,255,.35);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-
-html,body{width:100%;min-height:100%;}
-
-body{
-  min-height:100vh;
-  overflow:hidden;
-  background:#000;
-  color:var(--text);
-  font-family:Inter,system-ui,sans-serif;
+body {
+  min-height: 100vh;
+  background: #020205;
+  color: #8f7cff;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-#stars{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(#8f7cff 1px, transparent 1px),
+    radial-gradient(#7c68ff 1px, transparent 1px);
+  background-size: 180px 180px, 260px 260px;
+  opacity: .35;
+  animation: moveStars 18s linear infinite;
 }
 
-.page{
-  position:relative;
-  z-index:1;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  transform:translateY(-8px);
-  padding:22px;
+.glow {
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(143,124,255,.22), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(25px);
 }
 
-.profile{
-  width:min(640px,92vw);
-  display:flex;
-  align-items:center;
-  gap:22px;
-  margin-bottom:48px;
-  filter:drop-shadow(0 0 12px rgba(139,124,255,.3));
+.profile {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  animation: popIn .7s ease;
 }
 
-.avatar{
-  width:86px;
-  height:86px;
-  position:relative;
-  flex:0 0 auto;
+.avatar {
+  font-size: 70px;
+  color: #8976ff;
+  filter: drop-shadow(0 0 18px #8976ff);
 }
 
-.avatar-head{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:var(--purple);
-  margin:0 auto;
-  box-shadow:var(--glow);
+h1 {
+  font-size: 30px;
+  text-shadow: 0 0 18px #7b68ff;
+  letter-spacing: 1px;
 }
 
-.avatar-body{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:38px;
-  background:var(--purple);
-  border-radius:32px 32px 10px 10px;
-  box-shadow:var(--glow);
+.bio {
+  font-weight: 800;
+  font-size: 14px;
+  max-width: 700px;
+  color: #a799ff;
 }
 
-.profile-text h1{
-  font-family:"Rubik Mono One",Inter,sans-serif;
-  font-size:clamp(22px,3.1vw,34px);
-  line-height:1;
-  letter-spacing:.5px;
-  color:var(--purple);
-  text-shadow:var(--glow);
-  white-space:nowrap;
+.small {
+  font-size: 11px;
+  font-weight: bold;
+  opacity: .7;
 }
 
-.pill{
-  display:inline-flex;
-  align-items:center;
-  gap:2px;
-  margin-left:8px;
-  padding:4px 10px;
-  border-radius:999px;
-  font-family:Inter,sans-serif;
-  font-size:18px;
-  background:rgba(255,255,255,.12);
-  box-shadow:inset 0 0 15px rgba(255,255,255,.08), 0 0 18px rgba(139,124,255,.2);
+.discord-card {
+  width: min(92vw, 680px);
+  margin-top: 28px;
+  background: rgba(35, 31, 62, .88);
+  border: 1px solid rgba(143,124,255,.35);
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 0 25px rgba(143,124,255,.18);
+  text-align: left;
 }
 
-.profile-text p{
-  margin-top:13px;
-  font-family:"Rubik Mono One",Inter,sans-serif;
-  font-size:12px;
-  color:var(--purple);
-  text-shadow:0 0 12px rgba(139,124,255,.85);
+.discord-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(143,124,255,.18);
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.profile-text span{
-  display:block;
-  margin-top:4px;
-  font-family:"Rubik Mono One",Inter,sans-serif;
-  font-size:8px;
-  color:rgba(145,134,255,.75);
-  text-shadow:0 0 8px rgba(139,124,255,.65);
+.discord-card h3 {
+  font-size: 15px;
+  color: #a99cff;
 }
 
-.discord-card{
-  width:min(690px,94vw);
-  min-height:92px;
-  border-radius:26px;
-  background:linear-gradient(180deg,rgba(38,35,74,.96),rgba(25,23,48,.96));
-  border:2px solid rgba(139,124,255,.18);
-  box-shadow:0 8px 0 rgba(11,10,25,.55), inset 0 1px 0 rgba(255,255,255,.06), 0 0 24px rgba(139,124,255,.14);
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:13px 18px;
-  position:relative;
+.discord-card p {
+  font-size: 11px;
+  font-weight: bold;
+  opacity: .8;
 }
 
-.server-icon{
-  width:64px;
-  height:64px;
-  border-radius:18px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(145deg,rgba(139,124,255,.22),rgba(139,124,255,.08));
-  color:var(--purple);
-  font-family:"Rubik Mono One";
-  font-size:32px;
-  text-shadow:var(--glow);
+.discord-card p span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #42ff81;
+  border-radius: 50%;
 }
 
-.server-info{margin-right:auto}
-.server-info h2{
-  font-family:"Rubik Mono One";
-  font-size:15px;
-  color:var(--purple);
-  text-shadow:0 0 12px rgba(139,124,255,.85);
+.discord-card button {
+  margin-left: auto;
+  border: none;
+  background: #20a85b;
+  color: white;
+  font-weight: 900;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
 }
 
-.server-info p{
-  margin-top:6px;
-  font-family:"Rubik Mono One";
-  font-size:8px;
-  color:rgba(145,134,255,.85);
+.discord-card button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px #20a85b;
 }
 
-.online-dot{
-  display:inline-block;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#22c55e;
-  box-shadow:0 0 8px #22c55e;
-  vertical-align:middle;
+.socials {
+  margin-top: 22px;
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.discord-mark{
-  position:absolute;
-  top:12px;
-  right:18px;
-  font-family:"Rubik Mono One";
-  font-size:10px;
-  color:rgba(145,134,255,.18);
+.socials a {
+  color: #9b8cff;
+  text-decoration: none;
+  font-size: 26px;
+  font-weight: 900;
+  text-shadow: 0 0 14px #8f7cff;
+  transition: .2s;
 }
 
-.join-btn{
-  margin-top:17px;
-  text-decoration:none;
-  color:white;
-  font-family:"Rubik Mono One";
-  font-size:10px;
-  background:#22a447;
-  border-radius:9px;
-  padding:14px 22px;
-  box-shadow:inset 0 -2px 0 rgba(0,0,0,.18);
-  transition:.2s ease;
+.socials a:hover {
+  transform: translateY(-6px) scale(1.15);
+  color: white;
 }
 
-.join-btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
-
-.socials{
-  margin-top:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+.location {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 0 12px #8f7cff;
 }
 
-.socials a{
-  width:39px;
-  height:39px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  text-decoration:none;
-  color:var(--purple);
-  font-family:"Rubik Mono One",Inter,sans-serif;
-  font-size:25px;
-  text-shadow:var(--glow);
-  filter:drop-shadow(0 0 12px rgba(139,124,255,.7));
-  transition:.18s ease;
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.socials a:hover{
-  transform:translateY(-4px) scale(1.08);
-  background:rgba(139,124,255,.14);
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: 300px 300px; }
 }
 
-.socials .wing{
-  font-size:34px;
-  transform:rotate(-8deg);
-  color:#fff;
-}
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
 
-.socials .wing:last-child{transform:rotate(8deg) scaleX(-1)}
+  .bio {
+    padding: 0 20px;
+  }
 
-.location{
-  width:min(690px,94vw);
-  margin-top:46px;
-  font-family:"Rubik Mono One";
-  font-size:11px;
-  color:var(--purple);
-  text-shadow:0 0 12px rgba(139,124,255,.75);
-  text-align:left;
-}
+  .discord-card {
+    flex-direction: column;
+    text-align: center;
+  }
 
-@media (max-width:650px){
-  .profile{justify-content:center;gap:14px;margin-bottom:32px}
-  .avatar{width:64px;height:64px}
-  .avatar-head{width:32px;height:32px}
-  .avatar-body{height:28px}
-  .profile-text h1{font-size:18px;white-space:normal}
-  .profile-text p{font-size:8px}
-  .discord-card{border-radius:20px}
-  .server-icon{width:52px;height:52px}
-  .join-btn{padding:12px 16px}
+  .discord-card button {
+    margin-left: 0;
+    width: 100%;
+  }
 }
